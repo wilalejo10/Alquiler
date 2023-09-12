@@ -3,17 +3,12 @@ public class Factura
 {
     private Cliente cliente;
     private Vehiculo vehiculo;
+    private double costoAlquiler;
     private double total;
     private Date fechaInicial;
     private Date fechaFinal;
 
-    public Factura(Cliente cliente, Vehiculo vehiculo, double total, Date fechaInicial, Date fechaFinal)
-    {
-        this.cliente = cliente;
-        this.vehiculo = vehiculo;
-        this.total = total;
-        this.fechaInicial = fechaInicial;
-        this.fechaFinal = fechaFinal;
+    public Factura(Cliente cliente, Vehiculo vehiculo, double costoAlquiler, Date fechaInicial, Date fechaFinal) {
     }
 
     // Getters y setters para acceder a los atributos
