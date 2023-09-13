@@ -28,7 +28,7 @@ public class Empresa
         {
             vehiculo.setEstado("ocupado");
 
-            // Calcular el costo del alquiler (puedes implementarlo según tus reglas)
+            // Calcular el costo del alquiler
             double costoAlquiler = calcularCostoAlquiler(vehiculo, fechaInicial, fechaFinal);
 
 
@@ -59,12 +59,12 @@ public class Empresa
         return vehiculo.getEstado();
     }
 
-    // Método para calcular el costo de alquiler (debes implementarlo según tus reglas)
+    // Método para calcular el costo de alquiler
     private double calcularCostoAlquiler(Vehiculo vehiculo, Date fechaInicial, Date fechaFinal)
     {
-        // Implementa aquí la lógica para calcular el costo de alquiler según el tipo de vehículo, fechas, etc.
-        // Puedes acceder a los atributos del vehículo para calcular el costo.
-        // El ejemplo aquí es simplemente un placeholder.
+        // Implementar para calcular el costo de alquiler según el tipo de vehículo, fechas, capacidad.
+        // Acceder a los atributos del vehículo para calcular el costo.
+         //un placeholder.
         return 0.0;
     }
 }
