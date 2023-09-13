@@ -1,65 +1,48 @@
+import javax.swing.*;
+
 public class Cliente
 {
-    private String numeroIdentidad;
     private String nombre;
-    private String direccion;
-    private String telefono;
-
-    public Cliente(String numeroIdentidad, String nombre, String direccion, String telefono)
-    {
-        this.numeroIdentidad = numeroIdentidad;
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.telefono = telefono;
-    }
-
-    // Getters y setters para acceder a los atributos
-    public String getNumeroIdentidad()
-    {
-        return numeroIdentidad;
-    }
-
-    public void setNumeroIdentidad(String numeroIdentidad)
-    {
-        this.numeroIdentidad = numeroIdentidad;
-    }
-
-    public String getNombre()
-    {
-        return nombre;
-    }
+    private int id;
+    private int telefono;
 
     public void setNombre(String nombre)
     {
         this.nombre = nombre;
     }
-
-    public String getDireccion()
+    public String getNombre()
     {
-        return direccion;
+        return nombre;
     }
 
-    public void setDireccion(String direccion)
+
+    public int getId()
     {
-        this.direccion = direccion;
+        return id;
     }
 
-    public String getTelefono()
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+
+    public int getTelefono()
     {
         return telefono;
     }
 
-    public void setTelefono(String telefono)
+    public void setTelefono(int telefono)
     {
         this.telefono = telefono;
     }
-    public String toString()
+
+    public void lecturaDatos()
     {
-        return "Cliente{" +
-                "numeroIdentidad='" + numeroIdentidad + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", telefono='" + telefono + '\'' +
-                '}';
+        String nombre = JOptionPane.showInputDialog("Ingrese el nombre de la persona que desea alquilar el vehiculo: ");
+        setNombre(nombre);
+        int idn = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el id del cliente: "));
+        setId(idn);
+        int tel =Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de telefono del cliente: "));
+        setTelefono(tel);
     }
 }
