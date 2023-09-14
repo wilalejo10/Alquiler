@@ -1,13 +1,11 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
-
 public class Main
 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Empresa empresa = new Empresa();
-        Cliente cliente;
 
         while (true) {
             System.out.println("Seleccione una opción:");
@@ -21,15 +19,11 @@ public class Main
                 case 1:
                     System.out.println("Ingrese el nombre del cliente:");
                     String nombreCliente = scanner.nextLine();
-                    cliente = new Cliente(nombreCliente);
-
                     System.out.println("Ingrese el CC del cliente: ");
-                    String idCliente = scanner.nextLine();
-                    Cliente id = new Cliente(idCliente);
-
+                    int idCliente = Integer.parseInt(scanner.nextLine());
                     System.out.println("Ingrese el telefono del cliente");
-                    String telCliente = scanner.nextLine();
-                    Cliente telefono = new Cliente(telCliente);
+                    int telCliente = Integer.parseInt(scanner.nextLine());
+                    Cliente cliente = new Cliente(nombreCliente, idCliente, telCliente);
 
                     System.out.println("Ingrese el tipo de vehículo (pasajeros/carga):");
                     String tipoVehiculo = scanner.nextLine();
@@ -41,7 +35,7 @@ public class Main
                     double costoPorDia = scanner.nextDouble();
 
                     System.out.println("Ingrese la fecha inicial del alquiler (dd/MM/yyyy):");
-                    scanner.nextLine(); // Consumir la nueva línea
+                    scanner.nextLine();
                     String fechaInicialStr = scanner.nextLine();
 
                     System.out.println("Ingrese la fecha final del alquiler (dd/MM/yyyy):");
@@ -56,12 +50,9 @@ public class Main
                         Vehiculo vehiculo = new Vehiculo(tipoVehiculo, capacidad, costoPorDia);
                         Factura factura = new Factura(cliente, vehiculo, fechaInicial, fechaFinal);
                         empresa.agregarFactura(factura);
-                        System.out.println("Guardando la factura" + factura);
                         System.out.println("Factura agregada con éxito.");
-                    }
-                    catch (Exception e)
-                    {
-                        System.out.println("Error al procesar las fechas. Asegúrese de ingresar el formato correcto.");
+                    } catch (Exception e) {
+                        System.out.println("Error al procesar las fechas Asegúrese de ingresar el formato correcto.");
                     }
                     break;
                 case 2:
