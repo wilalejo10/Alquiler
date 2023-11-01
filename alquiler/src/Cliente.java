@@ -1,48 +1,41 @@
-import javax.swing.*;
+import java.util.Iterator;
 
-public class Cliente
-{
+public class Cliente {
+    private String id;
     private String nombre;
-    private int id;
-    private int telefono;
-
-    public void setNombre(String nombre)
-    {
-        this.nombre = nombre;
-    }
-    public String getNombre()
-    {
-        return nombre;
-    }
-
-
-    public int getId()
-    {
-        return id;
-    }
-
-    public void setId(int id)
-    {
+    private String telefono;
+    public Cliente(String id, String nombre, String telefono) {
         this.id = id;
-    }
-
-    public int getTelefono()
-    {
-        return telefono;
-    }
-
-    public void setTelefono(int telefono)
-    {
+        this.nombre = nombre;
         this.telefono = telefono;
     }
+    public String getId() {
+        return id;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+    public String getTelefono() {
+        return telefono;
+    }
+    public String toString() {
+        return id + "," + nombre + "," + telefono;
+    }
+    public static class ClienteIterator implements Iterator<Cliente> {
+        private Iterator<Cliente> iterator;
 
-    public void lecturaDatos()
-    {
-        String nombre = JOptionPane.showInputDialog("Ingrese el nombre de la persona que desea alquilar el vehiculo: ");
-        setNombre(nombre);
-        int idn = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el id del cliente: "));
-        setId(idn);
-        int tel =Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de telefono del cliente: "));
-        setTelefono(tel);
+        public ClienteIterator(Iterator<Cliente> iterator) {
+            this.iterator = iterator;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return iterator.hasNext();
+        }
+
+        @Override
+        public Cliente next() {
+            return iterator.next();
+        }
     }
 }
