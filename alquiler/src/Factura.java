@@ -1,73 +1,78 @@
 import java.util.Date;
-public class Factura
-{
+import java.util.Iterator;
+
+public class Factura {
     private Cliente cliente;
     private Vehiculo vehiculo;
-    private double costoAlquiler;
-    private double total;
     private Date fechaInicial;
     private Date fechaFinal;
-
-    public Factura(Cliente cliente, Vehiculo vehiculo, double costoAlquiler, Date fechaInicial, Date fechaFinal) {
-    }
-
-    // Getters y setters para acceder a los atributos
-    public Cliente getCliente()
-    {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente)
-    {
+    private double costo;
+    public Factura(Cliente cliente, Vehiculo vehiculo, Date fechaInicial, Date fechaFinal) {
         this.cliente = cliente;
-    }
-
-    public Vehiculo getVehiculo()
-    {
-        return vehiculo;
-    }
-
-    public void setVehiculo(Vehiculo vehiculo)
-    {
         this.vehiculo = vehiculo;
-    }
-
-    public double getTotal()
-    {
-        return total;
-    }
-
-    public void setTotal(double total)
-    {
-        this.total = total;
-    }
-
-    public Date getFechaInicial()
-    {
-        return fechaInicial;
-    }
-
-    public void setFechaInicial(Date fechaInicial)
-    {
         this.fechaInicial = fechaInicial;
-    }
-
-    public Date getFechaFinal()
-    {
-        return fechaFinal;
-    }
-
-    public void setFechaFinal(Date fechaFinal)
-    {
         this.fechaFinal = fechaFinal;
+        this.costo = calcularCosto();
+    }
+    private double calcularCosto() {
+        // Verificar que fechaFinal sea mayor o igual que fechaInicial
+        if (fechaFinal.getTime() >= fechaInicial.getTime()) {
+            long diferenciaDias = ((fechaFinal.getTime() - fechaInicial.getTime()) / (24 * 60 * 60 * 1000)) + 1; // Resta de las fechas en milisegundos, segundos, minutos, horas, y el +1 para no cobrar 0 en caso de tener la misma fecha
+            if (vehiculo.getTipo().equalsIgnoreCase("pasajeros")) {
+                return vehiculo.getCostoPorDia() * diferenciaDias;
+            } else if (vehiculo.getTipo().equalsIgnoreCase("carga")) {
+                double toneladasCarga = vehiculo.getCapacidad();
+                return toneladasCarga * vehiculo.getCostoPorDia() * diferenciaDias;
+            } else {
+                return 0.0;
+            }
+        } else {
+            throw new IllegalArgumentException("La fecha final debe ser mayor o igual que la fecha inicial.");
+        }
     }
     public String toString() {
-        return "Factura{" +
-                "cliente=" + cliente +
-                ", vehiculo=" + vehiculo +
-                ", total=" + total +
-                ", fechaInicial=" + fechaInicial +
-                ", fechaFinal=" + fechaFinal +
-                '}';
+        return cliente.getId() + "," + vehiculo.getPlaca() + "," + fechaInicial + "," + fechaFinal + "," + costo;
+    }
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+    public Cliente getCliente() {
+        return cliente;
+    }
+    public Date getFechaInicial() {
+        return fechaInicial;
+    }
+    public Date getFechaFinal() {
+        return fechaFinal;
+    }
+    public double getCosto() {
+        return costo;
+    }
+    public void setFechaInicial(Date fechaInicial) {
+        this.fechaInicial = fechaInicial;
+        // Recalcular el costo cuando se establece la fecha inicial
+        this.costo = calcularCosto();
+    }
+    public void setFechaFinal(Date fechaFinal) {
+        this.fechaFinal = fechaFinal;
+        // Recalcular el costo cuando se establece la fecha final
+        this.costo = calcularCosto();
+    }
+    public static class FacturaIterator implements Iterator<Factura> {
+        private Iterator<Factura> iterator;
+
+        public FacturaIterator(Iterator<Factura> iterator) {
+            this.iterator = iterator;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return iterator.hasNext();
+        }
+
+        @Override
+        public Factura next() {
+            return iterator.next();
+        }
     }
 }
